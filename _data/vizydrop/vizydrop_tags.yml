@@ -1,0 +1,10 @@
+allowed-tags:
+  - getting_started
+  - overview
+  - api_spec
+  - oauth
+  - date_dsl
+  - sdk
+  - python
+  - publish
+  - security

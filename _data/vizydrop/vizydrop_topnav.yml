@@ -1,0 +1,63 @@
+## Topnav single links
+## if you want to list an external url, use external_url instead of url. the theme will apply a different link base.
+topnav:
+- title: Topnav
+  subcategories:
+#    - title: Sample
+#      url: /vizydrop/sample.html
+#      audience: writers, designers
+#      platform: all
+#      product: all
+#      version: all
+#      output: web
+
+    - title: Find Us on GitHub
+      external_url: https://github.com/vizydrop
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web
+
+#Topnav dropdowns
+topnav_dropdowns:
+- title: Topnav dropdowns
+  subcategories:
+    - title: More Resources
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web
+      items:
+        - title: Python SDK on PyPI
+          external_url: https://pypi.python.org/pypi/vizydrop-sdk/
+          audience: developers
+          platform: all
+          product: all
+          version: all
+          output: web
+
+        - title: Open-Sourced App Connectors
+          external_url: https://github.com/vizydrop/apps
+          audience: developers
+          platform: all
+          product: all
+          version: all
+          output: web
+
+        - title: Python SDK Examples
+          external_url: https://github.com/vizydrop/vizydrop-python-sdk/tree/master/examples
+          audience: developers
+          platform: all
+          product: all
+          version: all
+          output: web
+
+        - title: Node-JS Sample App
+          external_url: https://github.com/vizydrop/node-simple-app
+          audience: developers
+          platform: all
+          product: all
+          version: all
+          output: web

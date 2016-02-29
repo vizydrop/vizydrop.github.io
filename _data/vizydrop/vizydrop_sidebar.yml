@@ -1,0 +1,280 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+# Sidebar
+entries:
+- title: Sidebar
+  subcategories:
+  - title:
+    audience: developers
+    platform: all
+    product: all
+    version: all
+    output: pdf
+    type: frontmatter
+    items:
+    - title:
+      url: /titlepage.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: pdf
+      type: frontmatter
+    - title:
+      url: /tocpage.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: pdf
+      type: frontmatter
+
+  - title: Overview
+    audience: developers
+    platform: all
+    product: all
+    version: all
+    output: web, pdf
+    items:
+    - title: Introduction
+      url: /vizydrop/home.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: Brief Introduction
+      url: /vizydrop/home.html#brief-introduction
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: About Vizydrop
+      url: /vizydrop/vizydrop_about.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web
+
+    - title: Developer Support
+      url: /vizydrop/vizydrop_support.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web
+
+
+  - title: Integration Tutorial
+    audience: developers
+    platform: all
+    product: all
+    version: all
+    output: web, pdf
+    items:
+    - title: 1. Getting Started
+      url: /vizydrop/vizydrop_getting_started.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+  - title: REST API Spec
+    audience: developers
+    platform: all
+    product: all
+    version: all
+    output: web, pdf
+    items:
+    - title: Overview
+      url: /vizydrop/vizydrop_api_overview.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: Fields
+      url: /vizydrop/vizydrop_fields.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: DateSpec DSL
+      url: /vizydrop/vizydrop_datedsl.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: GET / - Schema Information
+      url: /vizydrop/vizydrop_api_schema_info.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: POST / - Source Data Fetch
+      url: /vizydrop/vizydrop_api_schema_fetch.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: POST /validate - Account Validation
+      url: /vizydrop/vizydrop_api_schema_validation.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: POST /datalist - Filter Options
+      url: /vizydrop/vizydrop_api_schema_datalist.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: GET /logo - App Logo
+      url: /vizydrop/vizydrop_api_schema_logo.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+  - title: Implementing OAuth
+    audience: developers
+    platform: all
+    product: all
+    version: all
+    output: web, pdf
+    items:
+    - title: OAuth v1
+      url: /vizydrop/vizydrop_api_oauth1.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: OAuth v2
+      url: /vizydrop/vizydrop_api_oauth2.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+  - title: Python 3 SDK
+    audience: developers
+    platform: all
+    product: all
+    version: all
+    output: web, pdf
+    items:
+    - title: Overview
+      url: /vizydrop/vizydrop_sdk_python.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: Application Class
+      url: /vizydrop/vizydrop_sdk_python_application.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: Account Class
+      url: /vizydrop/vizydrop_sdk_python_account.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: DataSource Class
+      url: /vizydrop/vizydrop_sdk_python_datasource.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: SourceFilter Class
+      url: /vizydrop/vizydrop_sdk_python_sourcefilter.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+  - title: Security Considerations
+    audience: developers
+    platform: all
+    product: all
+    version: all
+    output: web, pdf
+    items:
+
+    - title: Man In The Middle Attacks
+      url: /vizydrop/vizydrop_security_mitm.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+    - title: Brute Force Attacks
+      url: /vizydrop/vizydrop_security_bruteforce.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+  - title: Technical Specifications
+    audience: developers
+    platform: all
+    product: all
+    version: all
+    output: web, pdf
+    items:
+
+    - title: DateSpec DSL
+      url: /vizydrop/vizydrop_datedsl.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf
+
+  - title: Going Public
+    audience: developers
+    platform: all
+    product: all
+    version: all
+    output: web, pdf
+    items:
+    - title: Publishing Public Connectors
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web, pdf

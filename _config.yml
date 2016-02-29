@@ -1,0 +1,77 @@
+# this is simply copied over from config/config_designers.yml
+
+# project definitions
+project: vizydrop_developers
+audience: developers
+product: doc
+platform: all
+version: all
+output: web
+destination: ../doc_outputs
+topnav_title: Vizdrop Developer Documentation
+homepage_title: Welcome
+site_title: Vizydrop documentation for developers
+project_folder: vizydrop
+company_name: Taucraft Ltd.
+footer_image_location: ../../common_images/company_logo.png
+github_editme_path: vizydrop/vizydrop.github.io/edit/reviews
+disqus_shortname: vizydropdevs
+# variables
+
+
+sidebar_tagline: Vizydrop
+sidebar_version: Latest SDK 0.6.0
+theme_file: theme-blue.css
+pdf_file_name: vizydrop_developers_docs.pdf
+
+port: 4000
+
+exclude:
+  - _site
+  - _drafts
+  - configs/
+  - doc/vizydrop_writers*
+
+# same for all
+host: 127.0.0.1
+feedback_email: jonathan@vizydrop.com
+
+# these settings should work, but they don't seem to apply the right highlighting
+
+#highlighter: rouge
+#markdown: kramdown
+#kramdown:
+#  input: GFM
+#  auto_ids: true
+#  hard_wrap: false
+#  syntax_highlighter: rouge
+
+highlighter: pygments
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "tables", "with_toc_data"]
+
+
+collections:
+  tooltips:
+    output: false
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+      comments: true
+      search: true
+  -
+    scope:
+      path: ""
+      type: "tooltips"
+    values:
+      layout: "page"
+      comments: true
+      search: true
+      tooltip: true
+
