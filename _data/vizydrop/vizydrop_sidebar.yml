@@ -280,7 +280,9 @@ entries:
     version: all
     output: web, pdf
     items:
+
     - title: Publishing Public Connectors
+      url: /vizydrop/vizydrop_publish_public.html
       audience: developers
       platform: all
       product: all
