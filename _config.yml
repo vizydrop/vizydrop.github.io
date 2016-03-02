@@ -47,7 +47,7 @@ feedback_email: jonathan@vizydrop.com
 #  syntax_highlighter: rouge
 
 highlighter: pygments
-markdown: redcarpet
+markdown: kramdown
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "tables", "with_toc_data"]
 
