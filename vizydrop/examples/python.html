@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>Example Python App</title>
+  <link rel="stylesheet" href="/css/pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>Example Python Application</h1>
+      <a href="/vizydrop/home.html"><strong>&lt;&lt; Back To Docs</strong></a>
+    </div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      <p>The <strong>APIExample</strong> is a simple Vizydrop Third-Party Application (TPA) that demonstrates
+how to create an application that interfaces with an external REST API.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">from</span> <span class="nn">tornado</span> <span class="kn">import</span> <span class="n">gen</span>
+<span class="kn">from</span> <span class="nn">tornado.httpclient</span> <span class="kn">import</span> <span class="n">AsyncHTTPClient</span><span class="p">,</span> <span class="n">HTTPRequest</span>
+
+<span class="kn">from</span> <span class="nn">vizydrop.fields</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">vizydrop.sdk.account</span> <span class="kn">import</span> <span class="n">Account</span>
+<span class="kn">from</span> <span class="nn">vizydrop.sdk.application</span> <span class="kn">import</span> <span class="n">Application</span>
+<span class="kn">from</span> <span class="nn">vizydrop.sdk.source</span> <span class="kn">import</span> <span class="n">DataSource</span>
+<span class="kn">from</span> <span class="nn">vizydrop.sdk.source</span> <span class="kn">import</span> <span class="n">SourceSchema</span>
+<span class="kn">from</span> <span class="nn">.filter</span> <span class="kn">import</span> <span class="n">BlankFilter</span>
+<span class="kn">from</span> <span class="nn">.schema</span> <span class="kn">import</span> <span class="n">ApiExampleSchema</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      <h3><span id="the-application-class" href="the-application-class"> The Application class </span></h3>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      <p>The Application class is what ties together the multiple pieces of an application - sources and
+authentication schemes - as well as provides basic identifying information about the application.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">ApiExample</span><span class="p">(</span><span class="n">Application</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      <p>The internal Meta class ties together all our application's elements.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">version</span> <span class="o">=</span> <span class="s">&quot;1.0&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;External API Example&quot;</span>
+        <span class="n">website</span> <span class="o">=</span> <span class="s">&quot;http://www.vizydrop.com/&quot;</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;#FF9900&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;This is just an API example from the Vizydrop Python SDK.&quot;</span>
+        <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;example&#39;</span><span class="p">,</span> <span class="s">&#39;api&#39;</span><span class="p">,</span> <span class="p">]</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      <p>Give our list of available authentication options...</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">authentication</span> <span class="o">=</span> <span class="p">[</span><span class="n">NoAuth</span><span class="p">,</span> <span class="p">]</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      <p>...and do the same with our sources</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="n">ApiExampleSource</span><span class="p">,</span> <span class="p">]</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-8'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      <h3><span id="the-account-class" href="the-account-class"> The Account class </span></h3>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      <p>The Account class is how we specify what authentication schemes are available for our application</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">NoAuth</span><span class="p">(</span><span class="n">Account</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-10'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-10'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">identifier</span> <span class="o">=</span> <span class="s">&#39;none&#39;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;No Auth&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;No Authentication Necessary&quot;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-11'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-11'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">get_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-12'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-12'>#</a>
+      </div>
+      <p>In the real world, <code>get_request</code> would add to an HTTP request whatever information for authentication
+is required, such as HTTP Headers, OAuth Tokens, API tokens, etc.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">return</span> <span class="n">HTTPRequest</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-13'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-13'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="nd">@gen.coroutine</span>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-14'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-14'>#</a>
+      </div>
+      <p>Our <code>validate</code> routine performs the actual validation of an account and returns a tuple (bool, str)
+indicating whether an account is valid and what error(s) have occurred</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">return</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">None</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-15'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-15'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">get_friendly_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-16'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-16'>#</a>
+      </div>
+      <p>We must also provide a way to give a friendly name to an account - in the real world, this would include
+identifying information such as account name, email, etc.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">return</span> <span class="s">&quot;Vizydrop flatfile App Example&quot;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-17'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-17'>#</a>
+      </div>
+      <h3><span id="the-sourceschema-class" href="the-sourceschema-class"> The SourceSchema class </span></h3>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-18'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-18'>#</a>
+      </div>
+      <p>Here we define what fields we will receive back from our API, if it is well-formed.  Specifying a schema is
+not required, but recommended if your data is consistent and can be statically defined.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">ApiExampleSchema</span><span class="p">(</span><span class="n">SourceSchema</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;ID&quot;</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Name&quot;</span><span class="p">)</span>
+    <span class="n">publicationStage</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Publication Stage&quot;</span><span class="p">)</span>
+    <span class="n">downloadCount</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Download Count&quot;</span><span class="p">)</span>
+    <span class="n">viewCount</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;View Count&quot;</span><span class="p">)</span>
+    <span class="n">numberOfComments</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Comment Count&quot;</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-19'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-19'>#</a>
+      </div>
+      <p>Notice the <code>response_loc</code> kwarg - this is used by an internal helper to grab the value for this field.  In our
+data, <code>owner</code> is a dict, therefore we must tell Vizydrop to take the value of the <code>displayName</code> key within the
+<code>owner</code> dict.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">owner</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Owner&quot;</span><span class="p">,</span> <span class="n">response_loc</span><span class="o">=</span><span class="s">&quot;owner-displayName&quot;</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-20'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-20'>#</a>
+      </div>
+      <p>=== The Data Source ===</p>
+<p>Our DataSource class is where the main magic of a Vizydrop TPA happens - this is where we actually retrieve
+data.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">ApiExampleSource</span><span class="p">(</span><span class="n">DataSource</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-21'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-21'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-22'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-22'>#</a>
+      </div>
+      <p>Like all classes, we must have a Meta class with some basic identifying information</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">identifier</span> <span class="o">=</span> <span class="s">&quot;views&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Views&quot;</span>
+        <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;view&quot;</span><span class="p">,</span> <span class="p">]</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;Views available in the Consumer Complaints Database&quot;</span>
+        <span class="nb">filter</span> <span class="o">=</span> <span class="n">BlankFilter</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-23'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-23'>#</a>
+      </div>
+      <p>Be sure to include our source schema</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">Schema</span><span class="p">(</span><span class="n">ApiExampleSchema</span><span class="p">):</span>
+        <span class="k">pass</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-24'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-24'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="nd">@classmethod</span>
+    <span class="nd">@gen.coroutine</span>
+    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">source_filter</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-25'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-25'>#</a>
+      </div>
+      <p>This is where we actually gather data.  In this example, we are grabbing information from a public API.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">client</span> <span class="o">=</span> <span class="n">AsyncHTTPClient</span><span class="p">()</span>
+
+        <span class="n">uri</span> <span class="o">=</span> <span class="s">&#39;http://data.consumerfinance.gov/api/views.json&#39;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-26'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-26'>#</a>
+      </div>
+      <p>Be sure to use account.get_request so that any authentication information can be added</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">req</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">get_request</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">client</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">req</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-27'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-27'>#</a>
+      </div>
+      <p>load the response</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-28'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-28'>#</a>
+      </div>
+      <p>this helper function will "format" our data according to the schema we've specified above (remember that
+<code>response_loc</code> kwarg?)</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">formatted</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">format_data_to_schema</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-29'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-29'>#</a>
+      </div>
+      <p>and we finish up by sending our formatted data away</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">formatted</span><span class="p">)</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

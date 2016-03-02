@@ -225,6 +225,14 @@ entries:
       version: all
       output: web, pdf
 
+    - title: Example Application
+      url: /vizydrop/examples/python.html
+      audience: developers
+      platform: all
+      product: all
+      version: all
+      output: web
+
   - title: Security Considerations
     audience: developers
     platform: all
