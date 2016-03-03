@@ -32,25 +32,15 @@ exclude:
   - configs/
   - doc/vizydrop_writers*
 
-# same for all
 host: 127.0.0.1
 feedback_email: jonathan@vizydrop.com
 
-# these settings should work, but they don't seem to apply the right highlighting
-
-#highlighter: rouge
-#markdown: kramdown
-#kramdown:
-#  input: GFM
-#  auto_ids: true
-#  hard_wrap: false
-#  syntax_highlighter: rouge
-
-highlighter: pygments
+highlighter: rouge
 markdown: kramdown
-redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "tables", "with_toc_data"]
-
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
 
 collections:
   tooltips:
