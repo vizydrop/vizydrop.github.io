@@ -8,12 +8,12 @@ platform: all
 version: all
 output: web
 destination: ../doc_outputs
-topnav_title: Vizdrop Developer Documentation
+topnav_title: Developer Documentation
 homepage_title: Welcome
 site_title: Vizydrop documentation for developers
 project_folder: vizydrop
 company_name: Taucraft Ltd.
-footer_image_location: ../../common_images/company_logo.png
+footer_image_location: ../../common_images/logo_version.svg
 github_editme_path: vizydrop/vizydrop.github.io/edit/reviews
 disqus_shortname: vizydropdevs
 # variables
@@ -21,7 +21,7 @@ disqus_shortname: vizydropdevs
 
 sidebar_tagline: Vizydrop
 sidebar_version: Latest SDK 0.6.1
-theme_file: theme-blue.css
+theme_file: theme-vizydrop.css
 pdf_file_name: vizydrop_developers_docs.pdf
 
 port: 4000

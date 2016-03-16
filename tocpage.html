@@ -8,7 +8,7 @@ search: exclude
     <h1>Table of Contents</h1>
     {% include custom/conditions.html %}
 
-    <ul id="mysidebar" class="nav">
+    <ul id="mysidebar" class="nav nav-sidebar">
         {% for entry in sidebar %}
         {% for subcategory in entry.subcategories %}
         {% if subcategory.audience contains audience and subcategory.product contains product and subcategory.platform contains platform and subcategory.version contains version and subcategory.output contains "pdf" and subcategory.type != "frontmatter" %}
