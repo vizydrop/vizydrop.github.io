@@ -9,11 +9,11 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="fa fa-home fa-lg navbar-brand" href="home.html">&nbsp;<span class="projectTitle"> {{site.topnav_title}}</span></a>
+            <a class="fa fa-lg navbar-brand" href="home.html"><div class="projectTitle"><div class="logo-vizydrop"></div> {{site.topnav_title}}</div></a>
 
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right navbar-header">
                 <!-- entries without drop-downs appear here -->
                 <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
                 {% include custom/conditions.html %}
