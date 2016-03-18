@@ -1,29 +1,69 @@
+.topnavlinks {
+    overflow: hidden;
+}
+
 .navbar-brand {
     padding-top: 0;
     padding-bottom: 0;
+    flex: 1 1 auto;
 }
 
-.navbar-header > li .caret,
-.navbar-header > li > a::after {
+.navbar-header {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .navbar-collapse {
+        background: #000;
+        position: relative;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-header-right {
+        display: flex;
+        background: transparent;
+    }
+}
+
+.navbar-header-right > li {
+    white-space: nowrap;
+}
+
+.navbar-header-right > li .caret,
+.navbar-header-right > li > a::after {
     margin-left: 5px;
 }
 
-.navbar-header .fa-envelope-o {
+.navbar-header-right .fa-envelope-o {
     margin-right: 5px;
 }
 
 .projectTitle {
-    display: flex;
-    align-items: center;
     font-weight: 600;
     font-family: 'SourceSansPro';
+    display: flex;
+    align-items: center;
+}
+
+.logo-vizydrop-wrap {
+    flex: 0 0 auto;
+    position: relative;
+    height: 100%;
+    min-height: 50px;
+    width: 109px;
+    margin: 0 15px 0 0;
 }
 
 .logo-vizydrop {
-    height: 50px;
+    height: 109px;
     width: 109px;
     background: url("../common_images/logo.svg") 50% 50% no-repeat;
-    margin: 0 15px 0 0;
+    position: absolute;
+    top: 50%;
+    margin-top: -50%;
+    left: 0;
 }
 
 .bs-callout {
@@ -129,6 +169,18 @@ h6[id],
 dt[id] {
     padding-top: 60px;
     margin-top: -40px
+}
+
+@media (max-width: 330px) {
+    .navbar-fixed-top {
+        position: relative;
+        margin-bottom: 0;
+    }
+
+    body {
+        padding-top: 0;
+        min-width: 330px;
+    }
 }
 
 body h1 {
