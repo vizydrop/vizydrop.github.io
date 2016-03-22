@@ -1,5 +1,5 @@
 .topnavlinks {
-    overflow: hidden;
+    position: relative;
 }
 
 .navbar-brand {
@@ -15,7 +15,6 @@
 
 @media (max-width: 768px) {
     .navbar-collapse {
-        background: #000;
         position: relative;
     }
 }
@@ -41,19 +40,22 @@
 }
 
 .projectTitle {
+    min-height: 50px;
     font-weight: 600;
     font-family: 'SourceSansPro';
     display: flex;
     align-items: center;
+    margin-left: 125px;
 }
 
 .logo-vizydrop-wrap {
-    flex: 0 0 auto;
-    position: relative;
-    height: 100%;
+    position: absolute;
+    left: 15px;
+    top: 0;
     min-height: 50px;
     width: 109px;
     margin: 0 15px 0 0;
+    overflow: hidden;
 }
 
 .logo-vizydrop {
@@ -355,28 +357,45 @@ p.post-meta {
 }
 
 /* search area */
-#search-demo-container ul#results-container {
+.search-results-list {
     list-style: none;
-    font-size: 12px;
     background-color: white;
     position: absolute;
-    top: 40px; /* if you change anything about the nav, you'll prob. need to reset the top and left values here.*/
+    top: 35px; /* if you change anything about the nav, you'll prob. need to reset the top and left values here.*/
     left: 20px;
     z-index: -1;
-    width: 223px;
+    min-width: 220px;
+    max-width: 300px;
     border-left: 1px solid #dedede;
-    box-shadow: 2px 3px 2px #dedede;
+    box-shadow: 2px 0 2px rgba(0, 0, 0, 0.3), 0 2px 2px rgba(0, 0, 0, 0.3);
+    margin: 0;
+    padding: 0;
+    white-space: normal;
 }
 
-ul#results-container a {
+.search-results-list__item {
+    padding: 0 10px 5px 10px;
+    font-size: 14px;
+}
+
+.search-results-list__item:first-child {
+    padding-top: 5px;
+}
+
+.search-results-list a {
     background-color: transparent;
 }
 
-ul#results-container a:hover {
+.search-results-list a:hover {
     color: black;
 }
 
-#search-demo-container a:hover {
+.search-results-container {
+    margin-top: 10px;
+    position: relative;
+}
+
+.search-results-container a:hover {
     color: black;
 }
 
@@ -388,8 +407,6 @@ ul#results-container a:hover {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    float: right;
-    margin-top: 10px;
 }
 
 @media (max-width: 768px) {
